@@ -1,0 +1,242 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(-45deg,
+    #060818,
+    #120b33,
+    #1d093d,
+    #060818);
+
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    color:white;
+}
+
+@keyframes bgMove{
+    0%{
+        background-position:0% 50%;}
+    50%{
+        background-position:100% 50%;}
+    100%{
+        background-position:0% 50%;}
+}
+
+h1{
+    text-align:center;
+    font-size:48px;
+    line-height:1.2;
+    text-shadow:
+    0 0 15px #ff3cac,
+    0 0 35px #ff3cac;
+}
+
+h2{
+    margin-top:10px;
+    color:#ffc8f2;
+    letter-spacing:5px;
+    font-weight:normal;
+}
+
+#cd{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    margin:40px 0;
+    background:
+    radial-gradient(circle,#444 8%,#111 12%,#ff3cac 18%,#7a5cff 45%,#0d0d0d 100%);
+    box-shadow:
+    0 0 20px #ff3cac,
+    0 0 60px #7a5cff;
+    position:relative;
+}
+#cd-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:30px 0;
+    transition:transform .02s linear;
+}
+
+#cd::after{
+    content:"";
+    position:absolute;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:white;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.spin{
+    animation:spin 2.5s linear infinite;
+}
+
+@keyframes spin{
+    from{
+        transform:rotate(0);}
+
+    to{
+        transform:rotate(360deg);}
+}
+
+#playBtn{
+    width:180px;
+    height:60px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    color:white;
+    font-size:22px;
+    background:linear-gradient(45deg,#ff3cac,#7a5cff);
+    box-shadow:
+    0 0 15px #ff3cac;
+    transition:.3s;
+}
+
+#playBtn:hover{
+    transform:scale(1.08);
+    box-shadow:
+    0 0 25px #ff3cac,
+    0 0 45px #7a5cff;
+}
+
+.visualizer{
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    height:100px;
+    margin-top:10px;
+    transform:translateY(-20px);
+}
+
+.bar{
+    width:10px;
+    height:10px;
+    transform-origin:center;
+    transition:transform .05s linear;
+
+    border-radius:20px;
+    background:linear-gradient(to top,
+    #00f0ff,
+    #7a5cff,
+    #ff3cac);
+    box-shadow:
+    0 0 10px #00f0ff,
+    0 0 25px #ff3cac;
+}
+
+#music-notes{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:1;
+}
+
+.note{
+    position:absolute;
+    bottom:-50px;
+    color:white;
+    opacity:.9;
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 20px #ff3cac,
+        0 0 35px #7a5cff;
+    animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;}
+    10%{
+        opacity:1;}
+    100%{
+        transform:translateY(-120vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#ff3cac;
+    border-radius:50%;
+    filter:blur(180px);
+    top:-150px;
+    left:-150px;
+    opacity:.35;
+    animation:blob1 10s infinite alternate ease-in-out;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    background:#00f0ff;
+    border-radius:50%;
+    filter:blur(180px);
+    bottom:-150px;
+    right:-150px;
+    opacity:.35;
+    animation:blob2 12s infinite alternate ease-in-out;
+}
+
+@keyframes blob1{
+    from{
+        transform:translate(0,0);}
+    to{
+        transform:translate(150px,120px);}
+}
+
+@keyframes blob2{
+    from{
+        transform:translate(0,0);}
+    to{
+        transform:translate(-120px,-100px);}
+}
+
+h1,
+h2,
+#cd,
+#playBtn,
+.visualizer{
+    position:relative;
+    z-index:2;
+}
+
+@media(max-width:768px){
+    h1{
+        font-size:34px;}
+    h2{
+        font-size:16px;
+        letter-spacing:3px;}
+    #cd{
+        width:140px;
+        height:140px;}
+    .bar{
+        width:7px;}
+    #playBtn{
+        width:160px;
+        height:52px;
+        font-size:18px;}
+}
